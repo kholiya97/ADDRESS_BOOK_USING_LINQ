@@ -24,6 +24,9 @@ namespace Address_Book_Using_Linq
             dataTable.Columns.Add("ZipCode", typeof(int));
             dataTable.Columns.Add("PhoneNumber", typeof(long));
             dataTable.Columns.Add("Email", typeof(string));
+            
+              /*UC3:-Ability to insert new Contacts to Address Book */
+            
             dataTable.Rows.Add("Himanshu", "Kholiya", "Pune", "Pune", "Maharashtra", 400705, 9987932434, "kholiyahimanshu2@gmail.com");
             dataTable.Rows.Add("Om", "Kawasaki", "Pune", "Pune", "Maharashtra", 400701, 9987932434, "omprakash@gmail.com");
             dataTable.Rows.Add("Vishal", "Singh", "Bhandup", "Navimumbai", "Maharashtra", 400703, 9987932434, "vishal@gmail.com");
