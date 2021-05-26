@@ -70,7 +70,19 @@ namespace Address_Book_Using_Linq
                 displayAddressBook();
             }
         }
+        public void deleteParticularContact(Contact contact)
+        {
+            var recordData = dataTable.AsEnumerable().Where(data => data.Field<string>("FirstName") == contact.FirstName).First();
+            if (recordData != null)
+            {
+                recordData.Delete();
+                Console.WriteLine("Delete contact successfully");
+                displayAddressBook();
+
+            }
+        }
     }
+
     
     class Program
     {
@@ -79,7 +91,11 @@ namespace Address_Book_Using_Linq
             Console.WriteLine("***************Welcome To AddressBook Using Linq*************");
             AddressBookDataTable addressBookDataTable = new AddressBookDataTable();
             DataTable table = addressBookDataTable.createAddressBookTable();
-            addressBookDataTable.editContact(table);
+            Contact contact = new Contact();
+
+            Console.WriteLine("Enter the first name = ");
+            contact.FirstName = Console.ReadLine();
+            addressBookDataTable.deleteParticularContact(contact);
 
             Console.Read();
         }
