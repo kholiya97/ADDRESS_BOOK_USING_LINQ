@@ -104,6 +104,7 @@ namespace AddressBookUsingLinq
             }
         }
 
+        /*UC6:- SORT_BY_CITY */
         public void retrieveContactByCity(Contact contact)
         {
             var records = from dataTable in dataTable.AsEnumerable().Where(dataTable => dataTable.Field<string>("City") == contact.City) select dataTable;
@@ -121,7 +122,25 @@ namespace AddressBookUsingLinq
 
             }
         }
+        public void sortContactByGivenCity(Contact contact)
+        {
+            var records = dataTable.AsEnumerable().Where(x => x.Field<string>("City") == contact.City).OrderBy(x => x.Field<string>("FirstName")).ThenBy(x => x.Field<string>("LastName"));
+            foreach (var record in records)
+            {
+                Console.WriteLine("\nFirstName:-" + record.Field<string>("FirstName"));
+                Console.WriteLine("LastName:-" + record.Field<string>("LastName"));
+                Console.WriteLine("Address:-" + record.Field<string>("Address"));
+                Console.WriteLine("City:-" + record.Field<string>("City"));
+                Console.WriteLine("State:-" + record.Field<string>("State"));
+                Console.WriteLine("ZipCode:-" + record.Field<int>("ZipCode"));
+                Console.WriteLine("PhoneNumber:-" + record.Field<long>("PhoneNumber"));
+                Console.WriteLine("Email:-" + record.Field<string>("Email"));
+                displayAddressBook();
+
+            }
+        }
     }
+
     class Program
     {
         static void Main(string[] args)
@@ -132,9 +151,10 @@ namespace AddressBookUsingLinq
 
 
             Contact contact = new Contact();
-            Console.WriteLine("Enter the City  ");
+            Console.WriteLine("Enter the City ");
             contact.City = Console.ReadLine();
-            addressBookDataTable.retrieveContactByCity(contact);
+            addressBookDataTable.sortContactByGivenCity(contact);
+
             Console.Read();
         }
     }
