@@ -84,7 +84,6 @@ namespace Address_Book_Using_Linq
 
             }
         }
-    }
 
     
     class Program
