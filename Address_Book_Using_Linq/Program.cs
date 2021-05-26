@@ -70,6 +70,9 @@ namespace Address_Book_Using_Linq
                 displayAddressBook();
             }
         }
+        
+         /* UC5:- Ability to delete a person using person's name.
+         
         public void deleteParticularContact(Contact contact)
         {
             var recordData = dataTable.AsEnumerable().Where(data => data.Field<string>("FirstName") == contact.FirstName).First();
