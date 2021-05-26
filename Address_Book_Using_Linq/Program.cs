@@ -71,7 +71,7 @@ namespace Address_Book_Using_Linq
             }
         }
         
-         /* UC5:- Ability to delete a person using person's name.
+         /* UC5:- Ability to delete a person using person's name.*/
          
         public void deleteParticularContact(Contact contact)
         {
