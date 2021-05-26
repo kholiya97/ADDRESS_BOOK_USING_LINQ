@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Address_Book_Using_Linq;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Address_Book_Using_Linq
+namespace AddressBookUsingLinq
 {
     public class AddressBookDataTable
     {
@@ -58,7 +59,7 @@ namespace Address_Book_Using_Linq
             Console.WriteLine("Added contact successfully");
         }
 
-           /*UC4:- Ability to edit existing contact person using their name*/
+        /*UC4:- Ability to edit existing contact person using their name*/
         public void editContact(DataTable dataTable)
         {
             var recordData = dataTable.AsEnumerable().Where(data => data.Field<string>("FirstName") == "Himanshu");
@@ -70,6 +71,8 @@ namespace Address_Book_Using_Linq
                 displayAddressBook();
             }
         }
+
+        /* UC5:- Ability to delete a person using person's name.*/
         public void deleteParticularContact(Contact contact)
         {
             var recordData = dataTable.AsEnumerable().Where(data => data.Field<string>("FirstName") == contact.FirstName).First();
@@ -81,9 +84,44 @@ namespace Address_Book_Using_Linq
 
             }
         }
-    }
 
-    
+        /*UC6:- Ability to Retrieve Person belonging to a City or State from the Address Book*/
+        public void retrieveContactByState(Contact contact)
+        {
+            var records = from dataTable in dataTable.AsEnumerable().Where(dataTable => dataTable.Field<string>("State") == contact.State) select dataTable;
+            foreach (var record in records.AsEnumerable())
+            {
+                Console.WriteLine("\nFirstName:-" + record.Field<string>("FirstName"));
+                Console.WriteLine("LastName:-" + record.Field<string>("LastName"));
+                Console.WriteLine("Address:-" + record.Field<string>("Address"));
+                Console.WriteLine("City:-" + record.Field<string>("City"));
+                Console.WriteLine("State:-" + record.Field<string>("State"));
+                Console.WriteLine("ZipCode:-" + record.Field<int>("ZipCode"));
+                Console.WriteLine("PhoneNumber:-" + record.Field<long>("PhoneNumber"));
+                Console.WriteLine("Email:-" + record.Field<string>("Email"));
+                displayAddressBook();
+
+            }
+        }
+
+        public void retrieveContactByCity(Contact contact)
+        {
+            var records = from dataTable in dataTable.AsEnumerable().Where(dataTable => dataTable.Field<string>("City") == contact.City) select dataTable;
+            foreach (var record in records.AsEnumerable())
+            {
+                Console.WriteLine("\nFirstName:-" + record.Field<string>("FirstName"));
+                Console.WriteLine("LastName:-" + record.Field<string>("LastName"));
+                Console.WriteLine("Address:-" + record.Field<string>("Address"));
+                Console.WriteLine("City:-" + record.Field<string>("City"));
+                Console.WriteLine("State:-" + record.Field<string>("State"));
+                Console.WriteLine("ZipCode:-" + record.Field<int>("ZipCode"));
+                Console.WriteLine("PhoneNumber:-" + record.Field<long>("PhoneNumber"));
+                Console.WriteLine("Email:-" + record.Field<string>("Email"));
+                displayAddressBook();
+
+            }
+        }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -91,15 +129,14 @@ namespace Address_Book_Using_Linq
             Console.WriteLine("***************Welcome To AddressBook Using Linq*************");
             AddressBookDataTable addressBookDataTable = new AddressBookDataTable();
             DataTable table = addressBookDataTable.createAddressBookTable();
+
+
             Contact contact = new Contact();
-
-            Console.WriteLine("Enter the first name = ");
-            contact.FirstName = Console.ReadLine();
-            addressBookDataTable.deleteParticularContact(contact);
-
+            Console.WriteLine("Enter the City  ");
+            contact.City = Console.ReadLine();
+            addressBookDataTable.retrieveContactByCity(contact);
             Console.Read();
         }
     }
 }
-
 
